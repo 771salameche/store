@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
+import Layout from './components/Layout.jsx';
 import ProtectedAdminRoute from './components/ProtectedAdminRoute.jsx';
 import ProtectedAuthRoute from './components/ProtectedAuthRoute.jsx';
 import ProductList from './pages/ProductList.jsx';
@@ -16,26 +17,28 @@ function App() {
       <CartProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<ProductList />} />
-            <Route path="/products/:id" element={<ProductDetail />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route
-              path="/checkout"
-              element={
-                <ProtectedAuthRoute>
-                  <Checkout />
-                </ProtectedAuthRoute>
-              }
-            />
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/admin"
-              element={
-                <ProtectedAdminRoute>
-                  <Admin />
-                </ProtectedAdminRoute>
-              }
-            />
+            <Route element={<Layout />}>
+              <Route path="/" element={<ProductList />} />
+              <Route path="/products/:id" element={<ProductDetail />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route
+                path="/checkout"
+                element={
+                  <ProtectedAuthRoute>
+                    <Checkout />
+                  </ProtectedAuthRoute>
+                }
+              />
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedAdminRoute>
+                    <Admin />
+                  </ProtectedAdminRoute>
+                }
+              />
+            </Route>
           </Routes>
         </BrowserRouter>
       </CartProvider>
