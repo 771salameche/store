@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getProduct } from '../api';
 import { useCart } from '../context/CartContext';
+import Navbar from '../components/Navbar';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -38,21 +39,7 @@ export default function ProductDetail() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <header className="bg-white shadow-sm border-b border-slate-200">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <Link to="/" className="text-xl font-semibold text-slate-800">
-            Store
-          </Link>
-          <nav className="flex gap-4">
-            <Link to="/" className="text-slate-600 hover:text-slate-900">
-              Products
-            </Link>
-            <Link to="/cart" className="text-slate-600 hover:text-slate-900">
-              Cart
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Navbar current="products" />
 
       <main className="max-w-4xl mx-auto px-4 py-8">
         <Link
