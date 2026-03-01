@@ -23,6 +23,21 @@ export async function getProducts(): Promise<Product[]> {
   return res.json();
 }
 
+export async function verifyCredentials(
+  credentials: Credentials
+): Promise<{ role: string }> {
+  const productsRes = await fetch(`${BASE_URL}/api/products`, {
+    headers: { Authorization: basicAuthHeader(credentials) },
+  });
+  if (!productsRes.ok) throw new Error('Invalid username or password');
+  const ordersRes = await fetch(`${BASE_URL}/api/orders`, {
+    headers: { Authorization: basicAuthHeader(credentials) },
+  });
+  if (ordersRes.status === 401) throw new Error('Invalid username or password');
+  if (ordersRes.status === 200) return { role: 'ADMIN' };
+  return { role: 'USER' };
+}
+
 export async function getProduct(id: number): Promise<Product> {
   const res = await fetch(`${BASE_URL}/api/products/${id}`);
   if (!res.ok) throw new Error(`Failed to fetch product: ${res.status}`);
