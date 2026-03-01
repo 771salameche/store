@@ -77,6 +77,12 @@ export default function Cart() {
                 ${totalPrice.toFixed(2)}
               </span>
             </div>
+            <Link
+              to="/checkout"
+              className="block w-full py-3 px-6 bg-slate-800 text-white text-center rounded-lg hover:bg-slate-700 transition-colors font-medium"
+            >
+              Proceed to Checkout
+            </Link>
           </div>
         )}
       </main>
